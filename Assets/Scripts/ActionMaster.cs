@@ -9,6 +9,18 @@ public class ActionMaster {
     private int[] bowls = new int[21];
     private int bowl = 1;
 
+    public BowlAction NextAction(List<int> bowls) {
+
+        BowlAction NextBowlAction = BowlAction.Tidy;
+        bowl = 1;
+
+        foreach(int bowl in bowls) {
+            NextBowlAction = Bowl(bowl);
+        }
+
+        return NextBowlAction;
+    }
+
 	public BowlAction Bowl (int pins) {
         if (pins < 0 || pins > 10) {throw new UnityException("Impossible number of pins recorded: " + pins); }
 
