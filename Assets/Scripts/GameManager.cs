@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     private List<int> bowls = new List<int>();
-    private ActionMaster actionMaster = new ActionMaster();
     private PinSetter pinSetter;
     private Ball ball;
 
@@ -26,9 +25,7 @@ public class GameManager : MonoBehaviour {
         ball.Reset();
 
         bowls.Add(pinsFallen);
-
-        ActionMaster.BowlAction action = actionMaster.NextAction(bowls);
-        pinSetter.SetPins(action);
+        pinSetter.SetPins(ActionMaster.NextAction(bowls));
 
         //Ask scoremaster for the score list
     }

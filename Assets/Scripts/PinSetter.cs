@@ -45,6 +45,8 @@ public class PinSetter : MonoBehaviour {
             if (pin) {
                 if (!pin.IsStanding()) {
                     Destroy(pin.gameObject);
+                } else {
+                    pin.transform.rotation = Quaternion.identity;
                 }
             }
         }
