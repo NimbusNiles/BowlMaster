@@ -23,7 +23,7 @@ public class PinCounter : MonoBehaviour {
 
     private void Start() {
         text = GameObject.Find("Pin Count").GetComponent<Text>();
-        ResetPinCount();
+        Reset();
     }
 
     private void Update() {
@@ -39,7 +39,7 @@ public class PinCounter : MonoBehaviour {
         }
     }
 
-    public void ResetPinCount() {
+    public void Reset() {
         lastSettledCount = 10;
         pins = FindObjectsOfType<Pin>();
     }

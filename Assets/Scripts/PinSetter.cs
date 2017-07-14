@@ -24,7 +24,7 @@ public class PinSetter : MonoBehaviour {
             case (ActionMaster.BowlAction.EndTurn):
             case (ActionMaster.BowlAction.Reset):
                 RenewPins();
-                pinCounter.ResetPinCount();
+                pinCounter.Reset();
                 break;
             case (ActionMaster.BowlAction.EndGame):
                 throw new UnityException("dont know how to end game yet");
