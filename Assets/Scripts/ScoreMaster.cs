@@ -19,33 +19,31 @@ public class ScoreMaster {
     }
 
     public static List<int> FrameScores(List<int> bowls) {
-        List<int> frameList = new List<int>();
+        List<int> frameScores = new List<int>();
 
         bool previousBowlClosedFrame = true;
 
         for(int ii = 0; ii < bowls.Count; ii++) {
-            
-            if (frameList.Count == 10) {
-                break;
-            }
+
+            if (frameScores.Count == 10) { break; }
 
             int futureBowls = bowls.Count - (ii + 1);
 
             if (!previousBowlClosedFrame) {
                 if (bowls[ii] + bowls[ii - 1] == 10) { // Spare!
                     if (futureBowls >= 1) {
-                        frameList.Add(bowls[ii - 1] + bowls[ii] + bowls[ii + 1]);
+                        frameScores.Add(bowls[ii - 1] + bowls[ii] + bowls[ii + 1]);
                         previousBowlClosedFrame = true;
                         continue;
                     }
                 } else { // Normal frame ending
-                    frameList.Add(bowls[ii - 1] + bowls[ii]);
+                    frameScores.Add(bowls[ii - 1] + bowls[ii]);
                     previousBowlClosedFrame = true;
                     continue;
                 }
             } else if (bowls[ii] == 10) { // Strike!
                 if (futureBowls >= 2) {
-                    frameList.Add(bowls[ii] + bowls[ii + 1] + bowls[ii + 2]);
+                    frameScores.Add(bowls[ii] + bowls[ii + 1] + bowls[ii + 2]);
                     previousBowlClosedFrame = true;
                     continue;
                 }
@@ -54,7 +52,7 @@ public class ScoreMaster {
             }
         }
 
-        return frameList;
+        return frameScores;
     }
     
 }

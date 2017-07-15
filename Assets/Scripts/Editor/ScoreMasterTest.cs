@@ -91,6 +91,7 @@ public class ScoreMasterTest {
     }
 
     [Test]
+    [Category("Verification")]
     public void T11VerificationGame01() {
         int[] bowls = { 10, 10, 9, 0, 10, 7, 3, 10, 8, 1, 6, 3, 6, 2, 9, 1, 10 };
         int[] expectedScores = { 29, 19, 9, 20, 20, 19, 9, 9, 8, 20 };
