@@ -48,4 +48,26 @@ public class ScoreMasterTest {
         Assert.AreEqual(expectedScores, ScoreMaster.FrameScores(bowls.ToList()));
     }
 
+    [Test]
+    public void T06BowlStrikeStrike23() {
+        int[] bowls = { 10, 10, 2, 3 };
+        int[] expectedScores = { 22, 15, 5 };
+        Assert.AreEqual(expectedScores, ScoreMaster.FrameScores(bowls.ToList()));
+    }
+
+    [Test]
+    public void T07BowlStrikeGivesNothing() {
+        int[] bowls = { 10 };
+        int[] expectedScores = { };
+        Assert.AreEqual(expectedScores, ScoreMaster.FrameScores(bowls.ToList()));
+    }
+
+    [Test]
+    public void T08BowlSpareStrike23() {
+        int[] bowls = { 9, 1, 10, 2, 3 };
+        int[] expectedScores = { 20, 15, 5 };
+        Assert.AreEqual(expectedScores, ScoreMaster.FrameScores(bowls.ToList()));
+    }
+
+
 }
