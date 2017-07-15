@@ -37,17 +37,13 @@ public class ScoreMaster {
                 thisBowlClosedFrame = true;
             }
 
-            if (!previousBowlClosedFrame && (bowls[ii] + bowls[ii-1] == 10)) {
-                spare = true;
+            if (!previousBowlClosedFrame) {
                 thisBowlClosedFrame = true;
+                if (bowls[ii] + bowls[ii - 1] == 10) {
+                    spare = true;
+                }
             }
-
-            if(!previousBowlClosedFrame) {
-                thisBowlClosedFrame = true;
-            }
-
-
-
+            
             if (thisBowlClosedFrame) {
                 if (strike) {
                     if (futureBowls >= 2) {
@@ -65,6 +61,10 @@ public class ScoreMaster {
 
             previousBowlClosedFrame = thisBowlClosedFrame;
             thisBowlClosedFrame = false;
+
+            if (frameList.Count == 10) {
+                break;
+            }
         }
 
         return frameList;
