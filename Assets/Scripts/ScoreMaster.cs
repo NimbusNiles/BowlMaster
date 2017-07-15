@@ -22,15 +22,15 @@ public class ScoreMaster {
         List<int> frameList = new List<int>();
 
         bool previousBowlClosedFrame = true;
-        bool thisBowlClosedFrame = false;
-
 
         for(int ii = 0; ii < bowls.Count; ii++) {
+            
+            int futureBowls = bowls.Count - (ii + 1);
 
             bool strike = false;
             bool spare = false;
 
-            int futureBowls = bowls.Count - (ii + 1);
+            bool thisBowlClosedFrame = false;
 
             if (bowls[ii] == 10 && previousBowlClosedFrame) {
                 strike = true;
@@ -57,14 +57,16 @@ public class ScoreMaster {
                     frameList.Add(bowls[ii - 1] + bowls[ii]);
                 }
 
-            }
+                previousBowlClosedFrame = true;
 
-            previousBowlClosedFrame = thisBowlClosedFrame;
-            thisBowlClosedFrame = false;
+                if (frameList.Count == 10) {
+                    break;
+                }
 
-            if (frameList.Count == 10) {
-                break;
+            } else {
+                previousBowlClosedFrame = false;
             }
+            
         }
 
         return frameList;
