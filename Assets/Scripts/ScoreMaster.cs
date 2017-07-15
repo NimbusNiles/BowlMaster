@@ -21,6 +21,22 @@ public class ScoreMaster {
     public static List<int> FrameScores(List<int> bowls) {
         List<int> frameList = new List<int>();
 
+        bool previousBowlClosedFrame = true;
+        bool thisBowlClosedFrame = false;
+
+        for(int ii = 0; ii < bowls.Count; ii++) { 
+
+            if(!previousBowlClosedFrame) {
+                thisBowlClosedFrame = true;
+            }
+
+            if (thisBowlClosedFrame) {
+                frameList.Add(bowls[ii - 1] + bowls[ii]);
+            }
+
+            previousBowlClosedFrame = thisBowlClosedFrame;
+            thisBowlClosedFrame = false;
+        }
 
         return frameList;
     }
