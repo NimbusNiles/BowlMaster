@@ -24,14 +24,43 @@ public class ScoreMaster {
         bool previousBowlClosedFrame = true;
         bool thisBowlClosedFrame = false;
 
-        for(int ii = 0; ii < bowls.Count; ii++) { 
+
+        for(int ii = 0; ii < bowls.Count; ii++) {
+
+            bool strike = false;
+            bool spare = false;
+
+            int futureBowls = bowls.Count - (ii + 1);
+
+            if (bowls[ii] == 10 && previousBowlClosedFrame) {
+                strike = true;
+                thisBowlClosedFrame = true;
+            }
+
+            if (!previousBowlClosedFrame && (bowls[ii] + bowls[ii-1] == 10)) {
+                spare = true;
+                thisBowlClosedFrame = true;
+            }
 
             if(!previousBowlClosedFrame) {
                 thisBowlClosedFrame = true;
             }
 
+
+
             if (thisBowlClosedFrame) {
-                frameList.Add(bowls[ii - 1] + bowls[ii]);
+                if (strike) {
+                    if (futureBowls >= 2) {
+                        frameList.Add(bowls[ii] + bowls[ii + 1] + bowls[ii + 2]);
+                    }
+                } else if (spare) {
+                    if (futureBowls >= 1) {
+                        frameList.Add(bowls[ii -1] + bowls[ii] + bowls[ii + 1]);
+                    }
+                } else {
+                    frameList.Add(bowls[ii - 1] + bowls[ii]);
+                }
+
             }
 
             previousBowlClosedFrame = thisBowlClosedFrame;
