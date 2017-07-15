@@ -25,48 +25,33 @@ public class ScoreMaster {
 
         for(int ii = 0; ii < bowls.Count; ii++) {
             
+            if (frameList.Count == 10) {
+                break;
+            }
+
             int futureBowls = bowls.Count - (ii + 1);
 
-            bool strike = false;
-            bool spare = false;
-
-            bool thisBowlClosedFrame = false;
-
-            if (bowls[ii] == 10 && previousBowlClosedFrame) {
-                strike = true;
-                thisBowlClosedFrame = true;
-            }
-
             if (!previousBowlClosedFrame) {
-                thisBowlClosedFrame = true;
-                if (bowls[ii] + bowls[ii - 1] == 10) {
-                    spare = true;
-                }
-            }
-            
-            if (thisBowlClosedFrame) {
-                if (strike) {
-                    if (futureBowls >= 2) {
-                        frameList.Add(bowls[ii] + bowls[ii + 1] + bowls[ii + 2]);
-                    }
-                } else if (spare) {
+                if (bowls[ii] + bowls[ii - 1] == 10) { // Spare!
                     if (futureBowls >= 1) {
-                        frameList.Add(bowls[ii -1] + bowls[ii] + bowls[ii + 1]);
+                        frameList.Add(bowls[ii - 1] + bowls[ii] + bowls[ii + 1]);
+                        previousBowlClosedFrame = true;
+                        continue;
                     }
-                } else {
+                } else { // Normal frame ending
                     frameList.Add(bowls[ii - 1] + bowls[ii]);
+                    previousBowlClosedFrame = true;
+                    continue;
                 }
-
-                previousBowlClosedFrame = true;
-
-                if (frameList.Count == 10) {
-                    break;
+            } else if (bowls[ii] == 10) { // Strike!
+                if (futureBowls >= 2) {
+                    frameList.Add(bowls[ii] + bowls[ii + 1] + bowls[ii + 2]);
+                    previousBowlClosedFrame = true;
+                    continue;
                 }
-
             } else {
                 previousBowlClosedFrame = false;
             }
-            
         }
 
         return frameList;
