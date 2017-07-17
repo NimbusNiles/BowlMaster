@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     private List<int> bowls = new List<int>();
     private PinSetter pinSetter;
     private Ball ball;
+    private ScoreDisplay scoreDisplay;
 
     private void OnEnable() {
         PinCounter.OnPinsFallen += ResolveBowl;
@@ -19,15 +20,17 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         pinSetter = FindObjectOfType<PinSetter>();
         ball = FindObjectOfType<Ball>();
+        scoreDisplay = FindObjectOfType<ScoreDisplay>();
     }
 
     void ResolveBowl(int pinsFallen) {
-        ball.Reset();
-
         bowls.Add(pinsFallen);
         pinSetter.SetPins(ActionMaster.NextAction(bowls));
 
-        //Ask scoremaster for the score list
+        List<int> frameScores = ScoreMaster.FrameScores(bowls);
+        scoreDisplay.FillBowlCard(bowls);
+
+        ball.Reset();
     }
 
 }

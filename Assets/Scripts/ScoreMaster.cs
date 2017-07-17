@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreMaster {
+public static class ScoreMaster {
 
     public static List<int> CumulativeScore(List<int> bowls) {
         List<int> cumulativeScores = new List<int>();
